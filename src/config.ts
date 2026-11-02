@@ -14,9 +14,9 @@ export const NAV = [
   { label: 'About me', href: '/about/' },
 ];
 
-// Leave a URL empty ('') to hide that icon.
+// empty '' hides icon
 export const SOCIALS = [
-  { label: 'LinkedIn', icon: 'linkedin', url: 'https://www.linkedin.com/in/szymon-tadeusz-ślązak-130379411' },
+  { label: 'LinkedIn', icon: 'linkedin', url: 'https://linkedin.com/in/szymon-tadeusz-ślązak-130379411' },
   { label: 'GitHub', icon: 'github', url: 'https://github.com/Likiiis' },
   { label: 'Instagram', icon: 'instagram', url: 'https://www.instagram.com/s.slazak/' },
   { label: 'Facebook', icon: 'facebook', url: 'https://www.facebook.com/profile.php?id=100086485225013' },

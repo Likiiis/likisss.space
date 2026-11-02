@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-# Build the blog and upload it to the NAS (served by nginx behind Traefik + Cloudflare Tunnel).
+
 set -euo pipefail
 cd "$(dirname "$0")"
 

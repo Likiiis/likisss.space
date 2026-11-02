@@ -1,5 +1,4 @@
-// Usage: npm run new -- "My post title"
-// Creates src/content/posts/<slug>/index.md as a draft.
+
 import { mkdirSync, writeFileSync, existsSync } from 'node:fs';
 
 const title = process.argv.slice(2).join(' ').trim();
@@ -30,9 +29,7 @@ title: ${JSON.stringify(title)}
 description: One or two sentences shown on the post list.
 date: ${today}
 tags: []
-draft: true          # remove this line (or set false) to publish
-# cover: ./cover.jpg
-# coverAlt: Describe the image
+draft: true          
 ---
 
 Start writing here.

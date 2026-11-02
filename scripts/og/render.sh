@@ -1,6 +1,3 @@
-#!/usr/bin/env bash
-# Renders the social-preview image and the apple-touch-icon into public/.
-# Needs: firefox (headless) and ImageMagick (magick).
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 

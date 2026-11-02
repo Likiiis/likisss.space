@@ -2,8 +2,7 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-// A post is either `src/content/posts/my-post.md`
-// or a folder `src/content/posts/my-post/index.md` with its images next to it.
+
 const stripIndex = ({ entry }: { entry: string }) =>
   entry.replace(/\/index\.mdx?$/, '').replace(/\.mdx?$/, '');
 
@@ -22,7 +21,7 @@ const posts = defineCollection({
     }),
 });
 
-// Plain pages written in Markdown: About me, Cool stuff.
+
 const pages = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/pages', generateId: stripIndex }),
   schema: z.object({
