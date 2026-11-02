@@ -1,0 +1,40 @@
+---
+import { Image } from 'astro:assets';
+import { formatDate, readingMinutes, tagSlug, type Post } from '../lib/posts';
+
+interface Props {
+  post: Post;
+}
+const { post } = Astro.props;
+const { title, description, date, tags, cover, coverAlt, draft } = post.data;
+const href = `/posts/${post.id}/`;
+---
+
+<li class:list={['card', { 'no-cover': !cover }]}>
+  {
+    cover && (
+      <div class="card-cover">
+        <Image src={cover} alt={coverAlt ?? ''} width={400} />
+      </div>
+    )
+  }
+  <div class="card-body">
+    <div class="meta">
+      <time datetime={date.toISOString()}>{formatDate(date)}</time> · {readingMinutes(post)} min read
+      {draft && ' · DRAFT'}
+    </div>
+    <h2><a href={href}>{title}</a></h2>
+    <p>{description}</p>
+    {
+      tags.length > 0 && (
+        <ul class="tags">
+          {tags.map((t) => (
+            <li>
+              <a href={`/tags/${tagSlug(t)}/`}>{t}</a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</li>

@@ -1,0 +1,24 @@
+---
+// Inline SVG icons from Material Design Icons, resolved at build time (no JS sent to the browser).
+import mdi from '@iconify-json/mdi/icons.json';
+
+interface Props {
+  name: string;
+  size?: number;
+}
+const { name, size = 22 } = Astro.props;
+const icon = (mdi.icons as Record<string, { body: string; width?: number; height?: number }>)[name];
+if (!icon) throw new Error(`Unknown icon: mdi:${name}`);
+const w = icon.width ?? mdi.width ?? 24;
+const h = icon.height ?? mdi.height ?? 24;
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox={`0 0 ${w} ${h}`}
+  width={size}
+  height={size}
+  aria-hidden="true"
+  focusable="false"
+  set:html={icon.body}
+/>

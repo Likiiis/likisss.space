@@ -1,0 +1,82 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { getPosts, formatDate, readingMinutes, tagSlug, type Post } from '../../lib/posts';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post, i) => ({
+    params: { id: post.id },
+    // posts are newest-first: the "newer" one is before, the "older" one after
+    props: { post, newer: posts[i - 1], older: posts[i + 1] },
+  }));
+}
+
+interface Props {
+  post: Post;
+  newer?: Post;
+  older?: Post;
+}
+const { post, newer, older } = Astro.props;
+const { title, description, date, updated, tags, cover, coverAlt } = post.data;
+const { Content } = await render(post);
+const ogImage = cover ? (await getImage({ src: cover, width: 1200 })).src : undefined;
+---
+
+<Base title={title} description={description} image={ogImage}>
+  <article>
+    <header class="article-head">
+      <div class="breadcrumbs"><a href="/">Posts</a> / {title}</div>
+      <h1>{title}</h1>
+      <p class="lead">{description}</p>
+      <div class="meta">
+        <time datetime={date.toISOString()}>{formatDate(date)}</time>
+        {updated && <>{' · updated '}<time datetime={updated.toISOString()}>{formatDate(updated)}</time></>}
+        {` · ${readingMinutes(post)} min read`}
+      </div>
+      {
+        tags.length > 0 && (
+          <ul class="tags" style="margin-top:.7rem">
+            {tags.map((t) => (
+              <li>
+                <a href={`/tags/${tagSlug(t)}/`}>{t}</a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </header>
+
+    {
+      cover && (
+        <figure class="article-cover">
+          <Image src={cover} alt={coverAlt ?? ''} width={1200} loading="eager" />
+        </figure>
+      )
+    }
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+
+  {
+    (newer || older) && (
+      <nav class="post-nav" aria-label="More posts">
+        {older && (
+          <a href={`/posts/${older.id}/`} class="prev">
+            <small>← Older</small>
+            {older.data.title}
+          </a>
+        )}
+        {newer && (
+          <a href={`/posts/${newer.id}/`} class="next">
+            <small>Newer →</small>
+            {newer.data.title}
+          </a>
+        )}
+      </nav>
+    )
+  }
+</Base>

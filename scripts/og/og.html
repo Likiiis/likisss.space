@@ -1,0 +1,105 @@
+<!doctype html>
+<!-- Template for public/og-default.png (1200x630). Regenerate with: scripts/og/render.sh -->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        font-family: 'Raleway';
+        src: url('../../node_modules/@fontsource-variable/raleway/files/raleway-latin-wght-normal.woff2') format('woff2');
+        font-weight: 100 900;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+      }
+      body {
+        position: relative;
+        font-family: 'Raleway', sans-serif;
+        color: #e6e8ee;
+        background:
+          radial-gradient(circle at 82% 30%, rgb(127 176 230 / 0.22), transparent 42%),
+          radial-gradient(circle at 10% 110%, rgb(47 95 147 / 0.35), transparent 50%),
+          linear-gradient(160deg, #0e1117 0%, #121a28 55%, #16243a 100%);
+      }
+      .stars {
+        position: absolute;
+        inset: 0;
+      }
+      .planet {
+        position: absolute;
+        right: 95px;
+        top: 95px;
+        width: 330px;
+        height: 330px;
+        color: #7fb0e6;
+      }
+      .content {
+        position: absolute;
+        left: 90px;
+        bottom: 92px;
+        width: 1020px;
+      }
+      h1 {
+        margin: 0;
+        font-size: 92px;
+        font-weight: 200;
+        line-height: 1.04;
+        letter-spacing: -0.01em;
+      }
+      h1 b {
+        font-weight: 500;
+        color: #fff;
+      }
+      p {
+        margin: 26px 0 0;
+        font-size: 30px;
+        font-weight: 400;
+        color: #9aa1ae;
+      }
+      .url {
+        position: absolute;
+        left: 90px;
+        top: 80px;
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: #7fb0e6;
+      }
+    </style>
+  </head>
+  <body>
+    <svg class="stars" id="stars" width="1200" height="630"></svg>
+
+    <svg class="planet" viewBox="0 0 32 32">
+      <ellipse cx="16" cy="16" rx="14.5" ry="5.2" fill="none" stroke="currentColor" stroke-width=".7" opacity=".5" transform="rotate(-20 16 16)" />
+      <circle cx="16" cy="16" r="7.5" fill="currentColor" />
+      <path d="M2.4 20.9 A14.5 5.2 -20 0 0 29.6 11.1" fill="none" stroke="currentColor" stroke-width=".7" />
+    </svg>
+
+    <div class="content">
+      <h1><b>Space</b> and <b>Tech</b><br />made simple</h1>
+      <p>Satellites, drones and electronics — explained simply.</p>
+    </div>
+    <div class="url">likisss.space</div>
+
+    <script>
+      // deterministic star field
+      let seed = 7;
+      const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+      const svg = document.getElementById('stars');
+      for (let i = 0; i < 140; i++) {
+        const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        c.setAttribute('cx', (rnd() * 1200).toFixed(1));
+        c.setAttribute('cy', (rnd() * 630).toFixed(1));
+        c.setAttribute('r', (rnd() * 1.3 + 0.3).toFixed(2));
+        c.setAttribute('fill', '#ffffff');
+        c.setAttribute('opacity', (rnd() * 0.5 + 0.15).toFixed(2));
+        svg.appendChild(c);
+      }
+    </script>
+  </body>
+</html>

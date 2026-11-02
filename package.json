@@ -1,0 +1,19 @@
+{
+  "name": "likisss-space",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "new": "node scripts/new-post.mjs",
+    "deploy": "./deploy.sh"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/raleway": "^5.3.0",
+    "@iconify-json/mdi": "^1.2.3",
+    "astro": "^7.4.1"
+  }
+}
